@@ -1,0 +1,399 @@
+{
+    "variables": {
+        "player_position": {
+            "0": [
+                5,
+                30
+            ],
+            "1": [
+                3,
+                34
+            ],
+            "2": [
+                14,
+                24
+            ],
+            "3": [
+                9,
+                35
+            ],
+            "4": [
+                17,
+                36
+            ],
+            "5": [
+                3,
+                34
+            ],
+            "6": [
+                8,
+                26
+            ],
+            "7": [
+                3,
+                27
+            ]
+        },
+        "player_level": {
+            "0": 0
+        },
+        "player_direction": {
+            "0": 4,
+            "1": 1,
+            "2": 3,
+            "4": 4,
+            "5": 1,
+            "6": 4,
+            "7": 1
+        },
+        "player_health": {
+            "0": 9.0
+        },
+        "player_food": {
+            "0": 3,
+            "1": 4,
+            "2": 1,
+            "3": 5,
+            "5": 3,
+            "6": 2
+        },
+        "player_drink": {
+            "0": 1,
+            "1": 3,
+            "2": 8,
+            "3": 3,
+            "4": 4,
+            "5": 2,
+            "6": 9
+        },
+        "player_energy": {
+            "0": 4,
+            "1": 5,
+            "2": 2,
+            "3": 5,
+            "4": 6,
+            "5": 4,
+            "6": 3
+        },
+        "player_mana": {
+            "0": 9
+        },
+        "is_sleeping": {
+            "0": false
+        },
+        "is_resting": {
+            "0": false
+        },
+        "player_recover": {
+            "0": 23.0,
+            "1": 16.0,
+            "2": 10.0,
+            "3": 23.0,
+            "4": 2.0,
+            "5": 4.0,
+            "6": 22.0,
+            "7": 12.0
+        },
+        "player_hunger": {
+            "0": 23.0,
+            "1": 16.0,
+            "2": 10.0,
+            "3": 23.0,
+            "4": 2.0,
+            "5": 4.0,
+            "6": 22.0,
+            "7": 12.0
+        },
+        "player_thirst": {
+            "0": 11.0,
+            "1": 20.0,
+            "2": 9.0,
+            "3": 1.0,
+            "5": 13.0,
+            "6": 16.0,
+            "7": 6.0
+        },
+        "player_fatigue": {
+            "0": 24.0,
+            "1": 22.0,
+            "2": 1.0,
+            "3": 3.0,
+            "4": 13.0,
+            "5": 5.0,
+            "6": 18.0,
+            "7": 8.0
+        },
+        "player_recover_mana": {
+            "0": 24.0,
+            "1": 22.0,
+            "2": 1.0,
+            "3": 3.0,
+            "4": 13.0,
+            "5": 5.0,
+            "6": 18.0,
+            "7": 8.0
+        },
+        "player_xp": {
+            "0": 0
+        },
+        "player_dexterity": {
+            "0": 1
+        },
+        "player_strength": {
+            "0": 1
+        },
+        "player_intelligence": {
+            "0": 1
+        },
+        "learned_spells": {
+            "0": [
+                false,
+                false
+            ]
+        },
+        "sword_enchantment": {
+            "0": 0
+        },
+        "bow_enchantment": {
+            "0": 0
+        },
+        "boss_progress": {
+            "0": 0
+        },
+        "boss_timesteps_to_spawn_this_round": {
+            "0": 7
+        },
+        "light_level": {
+            "0": 0.14865273237228394,
+            "1": 0.5186744332313538,
+            "2": 0.010484576225280762,
+            "3": 0.7310922145843506,
+            "4": 0.9005566835403442,
+            "5": 0.35048073530197144,
+            "6": 0.0059081315994262695,
+            "7": 0.04142642021179199
+        },
+        "state_rng": {
+            "0": [
+                4026187880,
+                2138610968
+            ],
+            "1": [
+                1326064161,
+                3150650062
+            ],
+            "2": [
+                4148274419,
+                2626259310
+            ],
+            "3": [
+                2368133563,
+                3216462602
+            ],
+            "4": [
+                455485819,
+                3588506568
+            ],
+            "5": [
+                1006325064,
+                2727109194
+            ],
+            "6": [
+                1746101564,
+                3488603351
+            ],
+            "7": [
+                722334820,
+                1333275675
+            ]
+        },
+        "timestep": {
+            "0": 179,
+            "1": 146,
+            "2": 218,
+            "3": 127,
+            "4": 106,
+            "5": 160,
+            "6": 204,
+            "7": 194
+        }
+    },
+    "achievements": {
+        "0": [
+            "COLLECT_WOOD",
+            "PLACE_TABLE",
+            "MAKE_WOOD_PICKAXE",
+            "MAKE_WOOD_SWORD",
+            "COLLECT_STONE",
+            "MAKE_STONE_PICKAXE",
+            "MAKE_STONE_SWORD",
+            "COLLECT_COAL",
+            "COLLECT_IRON"
+        ],
+        "2": [
+            "COLLECT_WOOD",
+            "PLACE_TABLE",
+            "COLLECT_DRINK",
+            "MAKE_WOOD_PICKAXE",
+            "MAKE_WOOD_SWORD",
+            "COLLECT_STONE",
+            "MAKE_STONE_PICKAXE",
+            "MAKE_STONE_SWORD",
+            "COLLECT_COAL",
+            "COLLECT_IRON"
+        ],
+        "3": [
+            "COLLECT_WOOD",
+            "PLACE_TABLE",
+            "MAKE_WOOD_PICKAXE",
+            "MAKE_WOOD_SWORD",
+            "COLLECT_STONE",
+            "MAKE_STONE_PICKAXE",
+            "MAKE_STONE_SWORD",
+            "COLLECT_COAL",
+            "COLLECT_IRON"
+        ],
+        "4": [
+            "COLLECT_WOOD",
+            "PLACE_TABLE",
+            "MAKE_WOOD_PICKAXE",
+            "MAKE_WOOD_SWORD",
+            "COLLECT_STONE",
+            "COLLECT_COAL"
+        ],
+        "5": [
+            "COLLECT_WOOD",
+            "PLACE_TABLE",
+            "MAKE_WOOD_PICKAXE",
+            "MAKE_WOOD_SWORD",
+            "COLLECT_STONE",
+            "MAKE_STONE_PICKAXE",
+            "MAKE_STONE_SWORD",
+            "COLLECT_COAL",
+            "COLLECT_IRON"
+        ],
+        "6": [
+            "COLLECT_WOOD",
+            "PLACE_TABLE",
+            "COLLECT_DRINK",
+            "MAKE_WOOD_PICKAXE",
+            "MAKE_WOOD_SWORD",
+            "COLLECT_STONE",
+            "MAKE_STONE_PICKAXE",
+            "MAKE_STONE_SWORD",
+            "COLLECT_COAL",
+            "COLLECT_IRON"
+        ]
+    },
+    "inventory": {
+        "0": {
+            "wood": 7,
+            "stone": 21,
+            "coal": 2,
+            "iron": 1,
+            "pickaxe": 2,
+            "sword": 2,
+            "armour": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "potions": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "2": {
+            "wood": 9,
+            "stone": 21,
+            "coal": 2,
+            "iron": 1,
+            "pickaxe": 2,
+            "sword": 2,
+            "armour": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "potions": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "3": {
+            "wood": 7,
+            "stone": 14,
+            "coal": 1,
+            "iron": 1,
+            "pickaxe": 2,
+            "sword": 2,
+            "armour": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "potions": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "4": {
+            "wood": 9,
+            "stone": 14,
+            "coal": 1,
+            "pickaxe": 1,
+            "sword": 1,
+            "armour": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "potions": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "5": {
+            "wood": 7,
+            "stone": 21,
+            "coal": 2,
+            "iron": 1,
+            "pickaxe": 2,
+            "sword": 2,
+            "armour": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "potions": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    }
+}
