@@ -1,5 +1,6 @@
-from typing import List
+from typing import List, Tuple
 from deserialization import GameData, achievements_list
+from math import sqrt
 
 def validate_achievements(player_achievements: List[str]) -> bool:
     return all(achievement in achievements_list for achievement in player_achievements)
@@ -155,3 +156,27 @@ def did_player_go_east(game_data, start_index, end_index):
     end_position = end_state.variables.player_position
     
     return end_position[0] > start_position[0]
+
+def check_achievement_inventory_radius(game_data: GameData, coordinate: Tuple[int, int], radius: int, achievement_name: str = None, item_name: str = None) -> bool:
+    """
+    Check if an achievement is obtained or an item is in the inventory within a certain radius of a coordinate.
+    
+    Args:
+    - game_data (GameData): The game data object.
+    - coordinate (Tuple[int, int]): The (x, y) coordinate to check around.
+    - radius (int): The radius within which to check.
+    - achievement_name (str, optional): The name of the achievement to check for.
+    - item_name (str, optional): The name of the item to check in the inventory.
+
+    Returns:
+    - bool: True if the achievement is obtained or the item is in the inventory within the radius, otherwise False.
+    """
+    for state in game_data.states:
+        position = state.variables.player_position
+        distance = sqrt((position[0] - coordinate[0]) ** 2 + (position[1] - coordinate[1]) ** 2)
+        if distance <= radius:
+            if achievement_name and achievement_name in state.achievements.achievements:
+                return True
+            if item_name and getattr(state.inventory, item_name, 0) > 0:
+                return True
+    return False
