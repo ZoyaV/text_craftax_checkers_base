@@ -69,6 +69,7 @@ class PlayerState:
     variables: PlayerVariables
     achievements: PlayerAchievements
     inventory: PlayerInventory
+    action: str
 
 @dataclass
 class GameData:
@@ -76,6 +77,21 @@ class GameData:
 
     @staticmethod
     def from_json(data: Dict[str, Any]) -> 'GameData':
+        action_map = {
+            'q': "noop", 'w': "up", 'd': "right", 's': "down", 'a': "left", 'space': "do",
+            '1': "make_wood_pickaxe", '2': "make_stone_pickaxe", '3': "make_iron_pickaxe",
+            '4': "make_diamond_pickaxe", '5': "make_wood_sword", '6': "make_stone_sword",
+            '7': "make_iron_sword", '8': "make_diamond_sword", 't': "place_table", 'tab': "sleep",
+            'r': "place_stone", 'f': "place_furnace", 'p': "place_plant", 'e': "rest", ',': "ascend",
+            '.': "descend", 'y': "make_iron_armour", 'u': "make_diamond_armour", 'i': "shoot_arrow",
+            'o': "make_arrow", 'g': "cast_fireball", 'h': "cast_iceball", 'j': "place_torch",
+            'z': "drink_potion_red", 'x': "drink_potion_green", 'c': "drink_potion_blue",
+            'v': "drink_potion_pink", 'b': "drink_potion_cyan", 'n': "drink_potion_yellow",
+            'm': "read_book", 'k': "enchant_sword", 'l': "enchant_armour", '[': "make_torch",
+            ']': "level_up_dexterity", '-': "level_up_strength", '=': "level_up_intelligence",
+            ';': "enchant_bow"
+        }
+
         states = []
         for key in data['variables']['player_position'].keys():
             key = int(key)
@@ -112,8 +128,8 @@ class GameData:
                 achievements=data['achievements'].get(str(key), [])
             )
             inventory = PlayerInventory(**data['inventory'].get(str(key), {}))
-            states.append(PlayerState(variables=variables, achievements=achievements, inventory=inventory))
-        
+            action = action_map.get(data['actions'].get(str(key), ''), 'unknown')
+            states.append(PlayerState(variables=variables, achievements=achievements, inventory=inventory, action=action))
         return GameData(states=states)
 
 def validate_achievements(player_achievements: List[str]) -> bool:
@@ -126,7 +142,7 @@ def load_game_data(file_path: str) -> GameData:
 
 if __name__ == "__main__":
     # Загрузка данных игры
-    game_data = load_game_data('compressed_changes.json')
+    game_data = load_game_data('/mnt/data/compressed_changes.json')
     
     # Валидация достижений для каждого игрока
     for state in game_data.states:
@@ -142,5 +158,6 @@ if __name__ == "__main__":
         print("Variables:", state.variables)
         print("Achievements:", state.achievements)
         print("Inventory:", state.inventory)
+        print("Action:", state.action)
         print("==================================================")
         print()
