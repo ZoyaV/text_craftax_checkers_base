@@ -179,3 +179,59 @@ def check_achievement_inventory_radius(game_data: GameData, coordinate: Tuple[in
             if item_name and getattr(state.inventory, item_name, 0) > 0:
                 return True
     return False
+
+def did_item_count_decrease(game_data: GameData, item_name: str, start_index: int, end_index: int) -> bool:
+    """
+    Check if the count of a specific item in the inventory has decreased between two game states.
+
+    Args:
+    - game_data (GameData): The game data object.
+    - item_name (str): The name of the item to check.
+    - start_index (int): The index of the starting game state.
+    - end_index (int): The index of the ending game state.
+
+    Returns:
+    - bool: True if the item count has decreased, otherwise False.
+    """
+    try:
+        start_inventory = game_data.states[start_index].inventory
+        end_inventory = game_data.states[end_index].inventory
+        start_count = getattr(start_inventory, item_name, 0)
+        end_count = getattr(end_inventory, item_name, 0)
+        return start_count > end_count
+    except AttributeError:
+        raise ValueError(f"Item '{item_name}' does not exist in PlayerInventory.")
+    except IndexError:
+        raise ValueError("Index out of range. Ensure the indices are within the correct range of states.")
+
+
+def was_item_placed(game_data: GameData, item_name: str, start_index: int, end_index: int, verbose: bool = False) -> bool:
+    """
+    Check if a specific item was placed by verifying if the item count decreased and an action was logged.
+
+    Args:
+    - game_data (GameData): The game data object.
+    - item_name (str): The name of the item to check.
+    - start_index (int): The index of the starting game state.
+    - end_index (int): The index of the ending game state.
+    - verbose (bool): Return index where item was placed
+
+    Returns:
+    - bool: True if the item was placed, otherwise False.
+    """
+    place_actions = {
+        "stone": "place_stone",
+        "table": "place_table",
+        "furnace": "place_furnace",
+        "plant": "place_plant",
+        "torch": "place_torch"
+    }
+
+    for index in range(start_index, end_index):
+        if did_item_count_decrease(game_data, item_name, index, index + 1):
+            action = game_data.states[index + 1].action
+            if place_actions.get(item_name) == action:
+                if verbose:
+                    return index
+                return True
+    return False
