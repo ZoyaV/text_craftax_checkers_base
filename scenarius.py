@@ -6,6 +6,7 @@ from math import sqrt
 
 
 def was_item_collected_after_another(game_data: GameData, first_item: str, second_item: str) -> bool:
+    ### WRONG!!!
     """
     Check if `second_item` was collected after `first_item`.
 
@@ -39,9 +40,9 @@ def did_placing_item_increase_variable(game_data: GameData, item: str, variable_
 
     Args:
     - game_data (GameData): The game data object.
-    - item (str): The inventory item to check.
+    - item (str): The inventory item to check; Possible items: table, stone, furnace, plant, torch.
     - variable_name (str): The variable to check for an increase.
-
+    
     Returns:
     - bool: True if placing `item` caused an increase in `variable_name`, otherwise False.
     """
@@ -64,8 +65,8 @@ def was_item_placed_near_another(game_data: GameData, first_item: str, second_it
 
     Args:
     - game_data (GameData): The game data object.
-    - first_item (str): The first item to check in the inventory.
-    - second_item (str): The second item to check in the inventory.
+    - first_item (str): The first item to check in the inventory. Possible items: table, stone, furnace, plant, torch.
+    - second_item (str): The second item to check in the inventory. Possible items: table, stone, furnace, plant, torch.
 
     Returns:
     - bool: True if `second_item` was placed near `first_item`, otherwise False.
@@ -93,8 +94,8 @@ def is_item_in_closed_contour(game_data: GameData, first_item: str, second_item:
 
     Args:
     - game_data (GameData): The game data object.
-    - first_item (str): The first item to check in the inventory.
-    - second_item (str): The second item to check in the inventory.
+    - first_item (str): The first item to check in the inventory. Possible items: table, stone, furnace, plant, torch.
+    - second_item (str): The second item to check in the inventory. Possible items: table, stone, furnace, plant, torch.
 
     Returns:
     - bool: True if `first_item` is within a closed contour formed by `second_item`, otherwise False.
@@ -169,4 +170,7 @@ def point_in_polygon(point: Tuple[int, int], polygon: List[Tuple[int, int]]) -> 
         p1x, p1y = p2x, p2y
 
     return inside
+
+if __name__ == "__main__":
+    pass
 
