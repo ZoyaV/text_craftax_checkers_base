@@ -41,7 +41,8 @@ def did_placing_item_increase_variable(game_data: GameData, item: str, variable_
     Args:
     - game_data (GameData): The game data object.
     - item (str): The inventory item to check; Possible items: table, stone, furnace, plant, torch.
-    - variable_name (str): The variable to check for an increase.
+    - variable_name (str): The variable to check for an increase. Possible variables: "player_position, player_level, player_direction, player_health, player_food, player_drink, player_energy, player_mana, is_sleeping, is_resting, player_recover, player_hunger, player_thirst, player_fatigue, player_recover_mana, player_xp, player_dexterity, player_strength, player_intelligence, learned_spells, sword_enchantment, bow_enchantment, boss_progress, boss_timesteps_to_spawn_this_round, light_level, state_rng, timestep"
+
     
     Returns:
     - bool: True if placing `item` caused an increase in `variable_name`, otherwise False.
