@@ -9,11 +9,11 @@ def was_item_collected_after_another(game_data: GameData, first_item: str, secon
     ### WRONG!!!
     """
     Check if `second_item` was collected after `first_item`.
-
+    
     Args:
     - game_data (GameData): The game data object.
-    - first_item (str): The first item to check in the inventory.
-    - second_item (str): The second item to check in the inventory.
+    - first_item (str): The first item to check in the inventory. Possible items (from PlayerInventory): wood, stonr, coal, iron, pickaxe, sword, armour, potions
+    - second_item (str): The second item to check in the inventory. Possible items (from PlayerInventory): wood, stonr, coal, iron, pickaxe, sword, armour, potions
 
     Returns:
     - bool: True if `second_item` was collected after `first_item`, otherwise False.
