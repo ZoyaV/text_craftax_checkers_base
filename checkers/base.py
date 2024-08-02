@@ -40,7 +40,7 @@ def find_item_in_inventory(game_data: GameData, item_name: str) -> List[int]:
         inventory = state.inventory
         if getattr(inventory, item_name, 0) > 0:
             states_with_item.append(i)
-    return states_with_item[0]
+    return states_with_item
 
 def is_achievement_obtained(game_data: GameData, achievement_name: str, start_index: int, end_index: int = None) -> bool:
     end_index = end_index if end_index is not None else start_index
@@ -57,7 +57,7 @@ def find_achievement_state(game_data: GameData, achievement_name: str) -> List[i
     for i, state in enumerate(game_data.states):
         if achievement_name in state.achievements.achievements:
             states_with_achievement.append(i)
-    return states_with_achievement[1]
+    return states_with_achievement
 
 def did_player_go_north(game_data, start_index, end_index):
     """
@@ -106,7 +106,6 @@ def did_player_go_south(game_data, start_index, end_index):
     end_position = end_state.variables.player_position
     
     return end_position[1] < start_position[1]
-
 
 
 def did_player_go_west(game_data, start_index, end_index):
