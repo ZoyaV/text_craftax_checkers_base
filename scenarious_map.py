@@ -79,15 +79,16 @@ def is_object_near_target(game_data: GameData, placed_object_name: str, target_o
     return is_near, is_north, is_south, is_east, is_west
 
 
-def is_player_within_all_water_sources(game_data: GameData) -> bool:
+def is_player_within_all_water_sources(game_data: GameData, required_object: str = None) -> bool:
     """
     Check if the player has been within the bounds of all water clusters across all game states.
-
+    
     Args:
     - game_data (GameData): The game data object containing the player's positions and map information.
-
+    - required_object (str): The name of the object that should be near the water cluster. It may be:  "CRAFTING_TABLE", "FURNACE", "CHEST", "FOUNTAIN", "ENCHANTMENT_TABLE_FIRE", "ENCHANTMENT_TABLE_ICE"
+    
     Returns:
-    - bool: True if the player has been within all water clusters at some point, False otherwise.
+    - bool: True if the player has been within all water clusters at some point and the object is present, False otherwise.
     """
     water_clusters = find_clusters(game_data)
 
@@ -99,6 +100,11 @@ def is_player_within_all_water_sources(game_data: GameData) -> bool:
         for cluster in water_clusters:
             within_cluster = any(sqrt((x - player_position[0])**2 + (y - player_position[1])**2) <= 1 for (x, y) in cluster)
             if within_cluster:
+                # Optional check for required object near the cluster
+                if required_object:
+                    object_nearby = any(required_object in state.map.look_around((x, y)) for (x, y) in cluster)
+                    if not object_nearby:
+                        continue
                 water_clusters.remove(cluster)  # Remove the cluster if the player has been within it
 
         # If all clusters have been covered, return True
@@ -108,15 +114,18 @@ def is_player_within_all_water_sources(game_data: GameData) -> bool:
     # If there are any remaining clusters, return False
     return False
 
-def is_player_within_north_water_sources(game_data: GameData) -> bool:
+
+def is_player_within_north_water_sources(game_data: GameData, required_object: str = None) -> bool:
     """
     Check if the player has been within the bounds of all water clusters in the northern part of the map across all game states.
-
+    
     Args:
     - game_data (GameData): The game data object containing the player's positions and map information.
-
+    - required_object (str): The name of the object that should be near the northern water cluster.It may be:
+        "CRAFTING_TABLE", "FURNACE", "CHEST", "FOUNTAIN", "ENCHANTMENT_TABLE_FIRE", "ENCHANTMENT_TABLE_ICE"
+    
     Returns:
-    - bool: True if the player has been within all northern water clusters at some point, False otherwise.
+    - bool: True if the player has been within all northern water clusters at some point and the object is present, False otherwise.
     """
     water_clusters = find_clusters(game_data)
     map_height = game_data.states[0].map.shape[0]
@@ -135,6 +144,11 @@ def is_player_within_north_water_sources(game_data: GameData) -> bool:
         for cluster in north_water_clusters:
             within_cluster = any(sqrt((x - player_position[0])**2 + (y - player_position[1])**2) <= 1 for (x, y) in cluster)
             if within_cluster:
+                # Optional check for required object near the cluster
+                if required_object:
+                    object_nearby = any(required_object in state.map.look_around((x, y)) for (x, y) in cluster)
+                    if not object_nearby:
+                        continue
                 north_water_clusters.remove(cluster)  # Remove the cluster if the player has been within it
 
         # If all northern clusters have been covered, return True
@@ -144,15 +158,17 @@ def is_player_within_north_water_sources(game_data: GameData) -> bool:
     # If there are any remaining northern clusters, return False
     return False
 
-def is_player_within_south_water_sources(game_data: GameData) -> bool:
+def is_player_within_south_water_sources(game_data: GameData, required_object: str = None) -> bool:
     """
     Check if the player has been within the bounds of all water clusters in the southern part of the map across all game states.
-
+    
     Args:
     - game_data (GameData): The game data object containing the player's positions and map information.
-
+    - required_object (str): The name of the object that should be near the southern water cluster.It may be: 
+      "CRAFTING_TABLE", "FURNACE", "CHEST", "FOUNTAIN", "ENCHANTMENT_TABLE_FIRE", "ENCHANTMENT_TABLE_ICE"
+    
     Returns:
-    - bool: True if the player has been within all southern water clusters at some point, False otherwise.
+    - bool: True if the player has been within all southern water clusters at some point and the object is present, False otherwise.
     """
     water_clusters = find_clusters(game_data)
     map_height = game_data.states[0].map.shape[0]
@@ -171,6 +187,11 @@ def is_player_within_south_water_sources(game_data: GameData) -> bool:
         for cluster in south_water_clusters:
             within_cluster = any(sqrt((x - player_position[0])**2 + (y - player_position[1])**2) <= 1 for (x, y) in cluster)
             if within_cluster:
+                # Optional check for required object near the cluster
+                if required_object:
+                    object_nearby = any(required_object in state.map.look_around((x, y)) for (x, y) in cluster)
+                    if not object_nearby:
+                        continue
                 south_water_clusters.remove(cluster)  # Remove the cluster if the player has been within it
 
         # If all southern clusters have been covered, return True
@@ -179,6 +200,7 @@ def is_player_within_south_water_sources(game_data: GameData) -> bool:
 
     # If there are any remaining southern clusters, return False
     return False
+
 
 
 def find_clusters(game_data: GameData, object_index:int=3):
