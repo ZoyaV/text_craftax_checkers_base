@@ -8,9 +8,12 @@ from scipy.ndimage import label
 from typing import Tuple
 from math import sqrt
 
-def is_object_near_target(game_data: GameData, placed_object_name: str, target_object_name: str, proximity: int = 1) -> bool:
+from typing import Tuple
+from math import sqrt
+
+def is_object_near_target(game_data: GameData, placed_object_name: str, target_object_name: str, proximity: int = 1) -> Tuple[bool, bool, bool, bool, bool]:
     """
-    Check if an object has been placed near a specific target object.
+    Check if an object has been placed near a specific target object and in which direction (north, south, east, west).
 
     Args:
     - game_data (GameData): The game data object containing the player's positions and map information.
@@ -22,7 +25,7 @@ def is_object_near_target(game_data: GameData, placed_object_name: str, target_o
     - proximity (int): The maximum distance between the placed object and the target object to be considered "near". Default is 1 block.
 
     Returns:
-    - bool: True if the placed object is near the target object, False otherwise.
+    - Tuple[bool, bool, bool, bool, bool]: A tuple indicating (is_near, is_north, is_south, is_east, is_west).
     """
     
     # List of objects that a player can place in the game
@@ -42,6 +45,12 @@ def is_object_near_target(game_data: GameData, placed_object_name: str, target_o
     if target_object_name not in relevant_target_objects:
         raise ValueError(f"The object '{target_object_name}' is not considered a relevant target for this check.")
     
+    is_near = False
+    is_north = False
+    is_south = False
+    is_east = False
+    is_west = False
+    
     # Iterate over all game states
     for state in game_data.states:
         map_data = state.map
@@ -57,9 +66,18 @@ def is_object_near_target(game_data: GameData, placed_object_name: str, target_o
             for placed_coord in placed_object_coords:
                 distance = sqrt((target_coord[0] - placed_coord[0]) ** 2 + (target_coord[1] - placed_coord[1]) ** 2)
                 if distance <= proximity:
-                    return True
+                    is_near = True
+                    if placed_coord[0] < target_coord[0]:
+                        is_north = True
+                    if placed_coord[0] > target_coord[0]:
+                        is_south = True
+                    if placed_coord[1] > target_coord[1]:
+                        is_east = True
+                    if placed_coord[1] < target_coord[1]:
+                        is_west = True
+    
+    return is_near, is_north, is_south, is_east, is_west
 
-    return False
 
 def is_player_within_all_water_sources(game_data: GameData) -> bool:
     """
